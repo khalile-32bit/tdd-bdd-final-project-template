@@ -195,3 +195,26 @@ class TestProductModel(unittest.TestCase):
         for product in found:
             self.assertEqual(product.category, category)
 
+    def test_serialize(self):
+        """ test_serialize  """
+        product = Product()
+        product.id = 1
+        product.name = "Test Product"
+        product.description = "This is a test product"
+        product.price = Decimal("9.99")
+        product.available = True
+        product.category = Category.CLOTHS
+
+        # Serialize the Product
+        serialized_data = product.serialize()
+
+        # Assert the serialized data
+        expected_data = {
+            "id": 1,
+            "name": "Test Product",
+            "description": "This is a test product",
+            "price": "9.99",
+            "available": True,
+            "category": "CLOTHS"
+        }
+        self.assertEqual(serialized_data, expected_data)
